@@ -1,5 +1,6 @@
 import streamlit as st
 import time
+import random
 
 # --- CLASSIC ACADEMIC & GOVERNMENT UI ---
 st.set_page_config(page_title="Diplomat AI | Model UN Hub", layout="centered")
@@ -77,18 +78,50 @@ if st.button("Generate Official Position Paper"):
         st.error("Please fill in the country and your rough stance.")
     else:
         with st.spinner("Drafting diplomatic response via NLP Core..."):
-            time.sleep(5)
+            # Randomizes the loading time to look like live server processing
+            time.sleep(random.uniform(3.5, 5.5)) 
             
-            mock_response = f"""
-            **I. Introduction**  
-            The {country} formally acknowledges the pressing gravity of the agenda concerning the {topic}. Recognizing the dual-use nature of modern technological systems, the delegation asserts that while innovation is inevitable, it must remain subordinate to international humanitarian law and the preservation of global stability.
+            # THE SECRET AI BRAIN: Checks keywords to pick a different response
+            stance_lower = rough_stance.lower()
+            
+            if any(word in stance_lower for word in ["ban", "stop", "illegal", "against", "bad", "threat", "restrict"]):
+                # SCENARIO 1: Aggressive / Restrictive Stance
+                mock_response = f"""
+                **I. Statement of Grave Concern**  
+                The delegation of {country} addresses the {committee} with utmost urgency regarding the escalating crisis of {topic}. It is our unequivocal position that the unchecked progression of this issue poses a direct and existential threat to international peace and humanitarian security.
 
-            **II. Principle of Sovereign Security and Defense**  
-            The {country} underscores that any comprehensive regulatory framework must not disproportionately disadvantage developing nations or infringe upon the sovereign right to national self-defense. It remains imperative that defensive architectures utilized to secure borders and neutralize asymmetrical threats are distinctly separated from offensive lethal systems.
+                **II. Imperative for Strict Regulation**  
+                We firmly reject any framework that prioritizes technological or economic expansion over fundamental human rights. {country} asserts that permissive attitudes toward {topic} have historically destabilized vulnerable regions. We demand immediate, strict international moratoriums to halt unilateral actions by state and non-state actors alike.
 
-            **III. Call for a Multilateral Ethical Framework**  
-            Therefore, this delegation calls upon the {committee} to draft a legally binding, equitable treaty that strictly mandates human-in-the-loop oversight. We urge member states to prioritize transparent verification mechanisms, ensuring that integration into defense infrastructure safeguards rather than destabilizes the international order.
-            """
+                **III. Call to Action**  
+                Consequently, we call upon the {committee} to establish a zero-tolerance resolution. We urge member states to implement rigorous, uncompromising verification protocols and to hold violators accountable under international law.
+                """
+            
+            elif any(word in stance_lower for word in ["support", "allow", "good", "promote", "economy", "growth", "opportunity"]):
+                # SCENARIO 2: Pro-Development / Permissive Stance
+                mock_response = f"""
+                **I. Introduction and Vision**  
+                The {country} welcomes the opportunity to discuss the critical agenda of {topic} within this esteemed {committee}. We firmly believe that when managed with foresight and multilateral cooperation, this represents an unprecedented opportunity for global advancement rather than a threat.
+
+                **II. Promoting Equitable Development**  
+                While acknowledging the inherent challenges, we must not let fear stifle progress. {country} emphasizes that any international framework must support capacity-building, particularly for developing nations. Overly restrictive bans on {topic} will only widen the global inequality gap and hinder sovereign economic development.
+
+                **III. Framework for Collaboration**  
+                The {country} advocates for a collaborative, open-source framework rather than punitive regulations. We propose the establishment of an international working group dedicated to knowledge sharing, ethical guidelines, and mutual assistance to ensure {topic} benefits all of humanity.
+                """
+            
+            else:
+                # SCENARIO 3: Nuanced / Balanced Stance (The Default)
+                mock_response = f"""
+                **I. Introduction**  
+                The {country} formally acknowledges the pressing gravity of the agenda concerning {topic}. Recognizing the dual-use nature of modern systems, the delegation asserts that while innovation and progress are inevitable, they must remain subordinate to international humanitarian law and the preservation of global stability.
+
+                **II. Principle of Sovereign Security and Defense**  
+                The {country} underscores that any comprehensive regulatory framework must not disproportionately disadvantage developing nations or infringe upon the sovereign right to national self-defense. It remains imperative that architectures utilized to secure borders and neutralize threats are distinctly protected under international mandates.
+
+                **III. Call for a Multilateral Ethical Framework**  
+                Therefore, this delegation calls upon the {committee} to draft a legally binding, equitable treaty that strictly mandates rigorous oversight. We urge member states to prioritize transparent verification mechanisms, ensuring that integration into infrastructure safeguards rather than destabilizes the international order.
+                """
             
             st.success("Draft Generated Successfully.")
             st.markdown("<div class='paper-container'>", unsafe_allow_html=True)
