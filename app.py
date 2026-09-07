@@ -1,158 +1,97 @@
 import streamlit as st
 import time
-import random
 
-# --- DATA SCIENCE / DEVELOPER UI ---
-st.set_page_config(page_title="CycleForge | AI Lifecycle", layout="wide")
+# --- CLASSIC ACADEMIC & GOVERNMENT UI ---
+st.set_page_config(page_title="Diplomat AI | Model UN Hub", layout="centered")
 st.markdown("""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Outfit:wght@400;700;900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Source+Sans+Pro:wght@400;600&display=swap');
 
     .stApp {
-        background-color: #0D1117; /* GitHub Dark Slate */
-        color: #C9D1D9;
-        font-family: 'Outfit', sans-serif;
+        background-color: #F9F7F1;
+        color: #2C3E50;
+        font-family: 'Source Sans Pro', sans-serif;
     }
     
-    h1 {
-        font-weight: 900;
-        font-size: 3.5rem !important;
-        background: -webkit-linear-gradient(45deg, #FF79C6, #8BE9FD);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        margin-bottom: 0px;
-    }
-
-    h3, h4 {
-        color: #8BE9FD;
+    h1, h2, h3 {
+        font-family: 'Merriweather', serif;
+        color: #8B0000;
+        border-bottom: 2px solid #8B0000;
+        padding-bottom: 10px;
     }
 
     .stTextInput input, .stTextArea textarea {
-        background-color: #161B22 !important;
-        border: 1px solid #30363D !important;
-        border-radius: 6px !important;
-        color: #58A6FF !important;
-        font-family: 'Fira Code', monospace;
-    }
-    
-    .stTextInput input:focus, .stTextArea textarea:focus {
-        border-color: #FF79C6 !important;
+        background-color: #FFFFFF !important;
+        border: 1px solid #BDC3C7 !important;
+        border-radius: 0px !important;
+        color: #2C3E50 !important;
+        font-family: 'Merriweather', serif;
     }
 
     .stButton button {
-        background-color: #238636 !important; /* Hacker Green */
+        background-color: #2C3E50 !important;
         color: #FFFFFF !important;
-        border-radius: 6px !important;
-        font-family: 'Fira Code', monospace;
-        font-weight: 600 !important;
-        border: 1px solid rgba(240, 246, 252, 0.1) !important;
-        transition: 0.2s;
-        padding: 0.5rem 1rem;
+        border-radius: 2px !important;
+        font-family: 'Merriweather', serif;
+        font-weight: 700 !important;
+        text-transform: uppercase;
+        border: 2px solid #2C3E50 !important;
+        transition: 0.3s;
     }
 
     .stButton button:hover {
-        background-color: #2EA043 !important;
-        transform: scale(1.02);
+        background-color: #FFFFFF !important;
+        color: #2C3E50 !important;
     }
 
-    .terminal-box {
-        background-color: #010409;
-        border: 1px solid #30363D;
-        border-radius: 8px;
-        padding: 25px;
-        font-family: 'Fira Code', monospace;
-        font-size: 0.9rem;
-        color: #E6EDF3;
-        line-height: 1.6;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    .paper-container {
+        background-color: #FFFFFF;
+        padding: 40px;
+        border: 1px solid #E0E0E0;
+        box-shadow: 5px 5px 15px rgba(0,0,0,0.05);
+        margin-top: 20px;
+        font-family: 'Merriweather', serif;
+        line-height: 1.8;
     }
-    
-    .highlight { color: #FF79C6; font-weight: bold; }
-    .stage { color: #8BE9FD; font-weight: bold; }
     </style>
 """, unsafe_allow_html=True)
 
 # --- APP LAYOUT ---
-st.markdown("<h1>CycleForge AI ⚙️</h1>", unsafe_allow_html=True)
-st.markdown("### The automated AI Project Cycle architect for real-world problems.")
-st.markdown("<hr style='border-color: #30363D;'>", unsafe_allow_html=True)
+st.markdown("<h1>Diplomat AI: Model UN Assistant</h1>", unsafe_allow_html=True)
+st.markdown("<p style='font-size: 1.2rem; font-style: italic;'>Automated diplomatic positioning and resolution drafting.</p><br>", unsafe_allow_html=True)
 
-col1, col2 = st.columns([1.2, 1])
-
+col1, col2 = st.columns(2)
 with col1:
-    st.markdown("#### 1. Define the Problem")
-    target_problem = st.text_area(
-        "Enter a real-world problem to solve:", 
-        placeholder="e.g., Heavy traffic congestion outside the school during dismissal time.",
-        value="Heavy traffic congestion outside the school during dismissal time.",
-        height=100
-    )
-    
-    target_audience = st.text_input("Who is facing this problem?", value="Students, Parents, and Local Commuters")
-    
-    st.markdown("<br>", unsafe_allow_html=True)
-    if st.button("Initialize AI Project Cycle 🚀"):
-        
-        # FAKE LOADING ANIMATION (Makes it look incredibly realistic)
-        progress_bar = st.progress(0)
-        status_text = st.empty()
-        
-        stages = ["Initializing Problem Scoping...", "Gathering Data Acquisition parameters...", "Simulating Data Exploration...", "Selecting ML Models...", "Finalizing Deployment Architecture..."]
-        
-        for i in range(100):
-            time.sleep(0.04) # Total ~4 seconds
-            progress_bar.progress(i + 1)
-            if i % 20 == 0:
-                status_text.markdown(f"**{stages[i//20]}**")
-        
-        status_text.empty()
-        progress_bar.empty()
-        
-        # MOCKED DYNAMIC RESPONSE
-        mock_roadmap = f"""
-        <div class="terminal-box">
-            <span style="color: #2EA043;">>> PROJECT CYCLE GENERATED SUCCESSFULLY</span><br><br>
-            
-            <span class="stage">[STAGE 1] PROBLEM SCOPING (The 4Ws)</span><br>
-            - <span class="highlight">Who:</span> {target_audience}.<br>
-            - <span class="highlight">What:</span> {target_problem}.<br>
-            - <span class="highlight">Where:</span> School zones and surrounding local infrastructure.<br>
-            - <span class="highlight">Why:</span> To reduce carbon emissions, save time, and prevent accidents during peak hours.<br><br>
-            
-            <span class="stage">[STAGE 2] DATA ACQUISITION</span><br>
-            - Deploy IoT traffic cameras to count vehicles.<br>
-            - Collect school bell timings and weather data via APIs.<br>
-            - Ensure data privacy by blurring license plates (Ethical AI constraint).<br><br>
-            
-            <span class="stage">[STAGE 3] DATA EXPLORATION</span><br>
-            - Plotting histograms of traffic volume vs. time of day.<br>
-            - Identifying anomalies (e.g., massive spikes on rainy days).<br><br>
-            
-            <span class="stage">[STAGE 4] MODELLING</span><br>
-            - <span class="highlight">Approach:</span> Learning-Based Model.<br>
-            - <span class="highlight">Algorithm:</span> Time-Series Forecasting (Predicting future traffic based on past patterns) & Computer Vision (YOLOv8 for vehicle counting).<br><br>
-            
-            <span class="stage">[STAGE 5] EVALUATION</span><br>
-            - Split dataset into 80% Training / 20% Testing.<br>
-            - Target Metric: 92% Precision in predicting gridlocks 15 minutes before they happen.<br><br>
-            
-            <span class="stage">[STAGE 6] DEPLOYMENT</span><br>
-            - Integrate predictions into a mobile app for parents.<br>
-            - Automate smart traffic lights at the school intersection based on real-time AI predictions.
-        </div>
-        """
-        st.session_state.roadmap = mock_roadmap
-        st.toast("Cycle mapping complete!", icon="✅")
-
+    country = st.text_input("Representing Country:", placeholder="e.g., Republic of India", value="Republic of India")
 with col2:
-    st.markdown("#### 2. Lifecycle Output Terminal")
-    if "roadmap" in st.session_state:
-        st.markdown(st.session_state.roadmap, unsafe_allow_html=True)
+    committee = st.text_input("Committee:", placeholder="e.g., UNSC", value="UNSC")
+
+topic = st.text_input("Agenda / Global Issue:", placeholder="e.g., Cyber Warfare", value="Regulation of Artificial Intelligence in Warfare")
+
+rough_stance = st.text_area("Your Rough Stance (Be honest, AI will make it professional):", 
+                            placeholder="e.g., We think it's bad but we also want to protect our borders...", height=150,
+                            value="We believe AI weapons are dangerous but we need to protect our borders so we shouldn't ban them completely.")
+
+if st.button("Generate Official Position Paper"):
+    if not country or not rough_stance:
+        st.error("Please fill in the country and your rough stance.")
     else:
-        st.info("Awaiting problem input... Click 'Initialize' to generate the 6-stage lifecycle.")
-        
-    # Extra flex: A fake model accuracy visualizer
-    if "roadmap" in st.session_state:
-        st.markdown("<br>#### 📊 Model Accuracy Simulator", unsafe_allow_html=True)
-        acc = random.randint(88, 96)
-        st.metric(label="Simulated Training Accuracy", value=f"{acc}.4%", delta="+2.1% improvement")
+        with st.spinner("Drafting diplomatic response via NLP Core..."):
+            time.sleep(5)
+            
+            mock_response = f"""
+            **I. Introduction**  
+            The {country} formally acknowledges the pressing gravity of the agenda concerning the {topic}. Recognizing the dual-use nature of modern technological systems, the delegation asserts that while innovation is inevitable, it must remain subordinate to international humanitarian law and the preservation of global stability.
+
+            **II. Principle of Sovereign Security and Defense**  
+            The {country} underscores that any comprehensive regulatory framework must not disproportionately disadvantage developing nations or infringe upon the sovereign right to national self-defense. It remains imperative that defensive architectures utilized to secure borders and neutralize asymmetrical threats are distinctly separated from offensive lethal systems.
+
+            **III. Call for a Multilateral Ethical Framework**  
+            Therefore, this delegation calls upon the {committee} to draft a legally binding, equitable treaty that strictly mandates human-in-the-loop oversight. We urge member states to prioritize transparent verification mechanisms, ensuring that integration into defense infrastructure safeguards rather than destabilizes the international order.
+            """
+            
+            st.success("Draft Generated Successfully.")
+            st.markdown("<div class='paper-container'>", unsafe_allow_html=True)
+            st.markdown(f"**DELEGATION:** {country.upper()}<br>**COMMITTEE:** {committee.upper()}<br>**AGENDA:** {topic.upper()}<br><hr>", unsafe_allow_html=True)
+            st.write(mock_response)
+            st.markdown("</div>", unsafe_allow_html=True)
