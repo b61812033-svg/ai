@@ -1,40 +1,161 @@
-import math
-import time
 import streamlit as st
+import time
+import random
 
-# --- GEN-Z FINTECH / NEO-BRUTALISM UI ---
-st.set_page_config(page_title="FinQuest AI", layout="wide")
+# --- DATA SCIENCE / DEVELOPER UI ---
+st.set_page_config(page_title="CycleForge | AI Lifecycle", layout="wide")
 st.markdown("""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Outfit:wght@400;700;900&display=swap');
 
     .stApp {
-        background-color: #FFFFFF;
-        color: #000000;
-        font-family: 'Space Grotesk', sans-serif;
+        background-color: #0D1117; /* GitHub Dark Slate */
+        color: #C9D1D9;
+        font-family: 'Outfit', sans-serif;
     }
     
     h1 {
-        font-weight: 700;
-        font-size: 4rem !important;
-        letter-spacing: -2px;
-        color: #000000;
+        font-weight: 900;
+        font-size: 3.5rem !important;
+        background: -webkit-linear-gradient(45deg, #FF79C6, #8BE9FD);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 0px;
     }
 
-    .stTextInput input, .stNumberInput input {
-        background-color: #F3F4F6 !important;
-        border: 2px solid #000000 !important;
-        border-radius: 12px !important;
-        color: #000000 !important;
-        font-weight: 600;
-        box-shadow: 4px 4px 0px #000000;
-        transition: 0.2s;
+    h3, h4 {
+        color: #8BE9FD;
+    }
+
+    .stTextInput input, .stTextArea textarea {
+        background-color: #161B22 !important;
+        border: 1px solid #30363D !important;
+        border-radius: 6px !important;
+        color: #58A6FF !important;
+        font-family: 'Fira Code', monospace;
     }
     
-    .stTextInput input:focus, .stNumberInput input:focus {
-        box-shadow: 2px 2px 0px #000000;
-        transform: translate(2px, 2px);
+    .stTextInput input:focus, .stTextArea textarea:focus {
+        border-color: #FF79C6 !important;
     }
+
+    .stButton button {
+        background-color: #238636 !important; /* Hacker Green */
+        color: #FFFFFF !important;
+        border-radius: 6px !important;
+        font-family: 'Fira Code', monospace;
+        font-weight: 600 !important;
+        border: 1px solid rgba(240, 246, 252, 0.1) !important;
+        transition: 0.2s;
+        padding: 0.5rem 1rem;
+    }
+
+    .stButton button:hover {
+        background-color: #2EA043 !important;
+        transform: scale(1.02);
+    }
+
+    .terminal-box {
+        background-color: #010409;
+        border: 1px solid #30363D;
+        border-radius: 8px;
+        padding: 25px;
+        font-family: 'Fira Code', monospace;
+        font-size: 0.9rem;
+        color: #E6EDF3;
+        line-height: 1.6;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    }
+    
+    .highlight { color: #FF79C6; font-weight: bold; }
+    .stage { color: #8BE9FD; font-weight: bold; }
+    </style>
+""", unsafe_allow_html=True)
+
+# --- APP LAYOUT ---
+st.markdown("<h1>CycleForge AI ⚙️</h1>", unsafe_allow_html=True)
+st.markdown("### The automated AI Project Cycle architect for real-world problems.")
+st.markdown("<hr style='border-color: #30363D;'>", unsafe_allow_html=True)
+
+col1, col2 = st.columns([1.2, 1])
+
+with col1:
+    st.markdown("#### 1. Define the Problem")
+    target_problem = st.text_area(
+        "Enter a real-world problem to solve:", 
+        placeholder="e.g., Heavy traffic congestion outside the school during dismissal time.",
+        value="Heavy traffic congestion outside the school during dismissal time.",
+        height=100
+    )
+    
+    target_audience = st.text_input("Who is facing this problem?", value="Students, Parents, and Local Commuters")
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    if st.button("Initialize AI Project Cycle 🚀"):
+        
+        # FAKE LOADING ANIMATION (Makes it look incredibly realistic)
+        progress_bar = st.progress(0)
+        status_text = st.empty()
+        
+        stages = ["Initializing Problem Scoping...", "Gathering Data Acquisition parameters...", "Simulating Data Exploration...", "Selecting ML Models...", "Finalizing Deployment Architecture..."]
+        
+        for i in range(100):
+            time.sleep(0.04) # Total ~4 seconds
+            progress_bar.progress(i + 1)
+            if i % 20 == 0:
+                status_text.markdown(f"**{stages[i//20]}**")
+        
+        status_text.empty()
+        progress_bar.empty()
+        
+        # MOCKED DYNAMIC RESPONSE
+        mock_roadmap = f"""
+        <div class="terminal-box">
+            <span style="color: #2EA043;">>> PROJECT CYCLE GENERATED SUCCESSFULLY</span><br><br>
+            
+            <span class="stage">[STAGE 1] PROBLEM SCOPING (The 4Ws)</span><br>
+            - <span class="highlight">Who:</span> {target_audience}.<br>
+            - <span class="highlight">What:</span> {target_problem}.<br>
+            - <span class="highlight">Where:</span> School zones and surrounding local infrastructure.<br>
+            - <span class="highlight">Why:</span> To reduce carbon emissions, save time, and prevent accidents during peak hours.<br><br>
+            
+            <span class="stage">[STAGE 2] DATA ACQUISITION</span><br>
+            - Deploy IoT traffic cameras to count vehicles.<br>
+            - Collect school bell timings and weather data via APIs.<br>
+            - Ensure data privacy by blurring license plates (Ethical AI constraint).<br><br>
+            
+            <span class="stage">[STAGE 3] DATA EXPLORATION</span><br>
+            - Plotting histograms of traffic volume vs. time of day.<br>
+            - Identifying anomalies (e.g., massive spikes on rainy days).<br><br>
+            
+            <span class="stage">[STAGE 4] MODELLING</span><br>
+            - <span class="highlight">Approach:</span> Learning-Based Model.<br>
+            - <span class="highlight">Algorithm:</span> Time-Series Forecasting (Predicting future traffic based on past patterns) & Computer Vision (YOLOv8 for vehicle counting).<br><br>
+            
+            <span class="stage">[STAGE 5] EVALUATION</span><br>
+            - Split dataset into 80% Training / 20% Testing.<br>
+            - Target Metric: 92% Precision in predicting gridlocks 15 minutes before they happen.<br><br>
+            
+            <span class="stage">[STAGE 6] DEPLOYMENT</span><br>
+            - Integrate predictions into a mobile app for parents.<br>
+            - Automate smart traffic lights at the school intersection based on real-time AI predictions.
+        </div>
+        """
+        st.session_state.roadmap = mock_roadmap
+        st.toast("Cycle mapping complete!", icon="✅")
+
+with col2:
+    st.markdown("#### 2. Lifecycle Output Terminal")
+    if "roadmap" in st.session_state:
+        st.markdown(st.session_state.roadmap, unsafe_allow_html=True)
+    else:
+        st.info("Awaiting problem input... Click 'Initialize' to generate the 6-stage lifecycle.")
+        
+    # Extra flex: A fake model accuracy visualizer
+    if "roadmap" in st.session_state:
+        st.markdown("<br>#### 📊 Model Accuracy Simulator", unsafe_allow_html=True)
+        acc = random.randint(88, 96)
+        st.metric(label="Simulated Training Accuracy", value=f"{acc}.4%", delta="+2.1% improvement")    }
 
     .stButton button {
         background-color: #CCFF00 !important;
